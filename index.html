@@ -1,4 +1,130 @@
-<HR>
-my anme:李柏志 <BR>
-my sid:C113181145<BR>
-my firstb github.io project
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>多視窗個人介紹</title>
+  <style>
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: #fff8f0;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #ff69b4;
+    }
+
+    button {
+      background-color: #ffd6e0;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffb3c1;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff0f6;
+      border: 3px solid #ffc0cb;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      width: 280px;
+    }
+
+    .popup h2 {
+      margin-top: 0;
+      color: #d6336c;
+    }
+
+    .popup p {
+      margin: 10px 0;
+    }
+
+    .close-btn {
+      margin-top: 15px;
+      background-color: #f783ac;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>關於我 🛵</h1>
+  <p>點選你想知道的資訊 💡</p>
+
+  <button onclick="showPopup('popup-junior')">看我的國中 👧</button>
+  <button onclick="showPopup('popup-senior')">看我的高中 🎓</button>
+  <button onclick="showPopup('popup-star')">看我的星座 ✨</button>
+  <button onclick="showPopup('popup-hobby')">看我的興趣 ❤️</button>
+
+  <div class="overlay" id="overlay" onclick="closeAllPopups()"></div>
+
+  <!-- 各個彈跳視窗 -->
+  <div class="popup" id="popup-junior">
+    <h2>👧 我的國中</h2>
+    <p>○○國中，是我青春的起點。</p>
+    <button class="close-btn" onclick="closeAllPopups()">關閉</button>
+  </div>
+
+  <div class="popup" id="popup-senior">
+    <h2>🎓 我的高中</h2>
+    <p>○○高中，交到很多重要的朋友，也開始有夢想。</p>
+    <button class="close-btn" onclick="closeAllPopups()">關閉</button>
+  </div>
+
+  <div class="popup" id="popup-star">
+    <h2>✨ 我的星座</h2>
+    <p>雙魚座 ♓，浪漫、感性、有點小迷糊 🐟</p>
+    <button class="close-btn" onclick="closeAllPopups()">關閉</button>
+  </div>
+
+  <div class="popup" id="popup-hobby">
+    <h2>❤️ 我的興趣</h2>
+    <p>喜歡騎車旅行、拍照、吃甜點，還有看看星星 🌌</p>
+    <button class="close-btn" onclick="closeAllPopups()">關閉</button>
+  </div>
+
+  <script>
+    function showPopup(id) {
+      document.getElementById('overlay').style.display = 'block';
+      document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function closeAllPopups() {
+      document.getElementById('overlay').style.display = 'none';
+      document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+    }
+  </script>
+
+</body>
+</html>
+
