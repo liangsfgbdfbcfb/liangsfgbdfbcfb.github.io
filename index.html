@@ -2,33 +2,54 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>特約店家地圖</title>
+  <title>高科海資系特約店家地圖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     #map { height: 100vh; }
     body { margin: 0; font-family: sans-serif; }
     h1 {
-      position: absolute;
-      top: 10px;
-      left: 10px;
+      position: relative;
       z-index: 999;
       background-color: rgba(255,255,255,0.8);
       padding: 10px;
       border-radius: 8px;
+      margin: 0;
     }
-    .popup-content {
-      text-align: center;
+    #controls {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 999;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .popup-content img {
-      width: 50px;
-      height: 50px;
-      margin-top: 5px;
+    #storeList a {
+      display: block;
+      margin: 5px 0;
+      color: #007bff;
+      text-decoration: none;
+    }
+    #storeList a:hover {
+      text-decoration: underline;
+    }
+    #searchInput {
+      width: 200px;
+      padding: 5px;
+      margin-bottom: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
   <h1>高科海資系特約店家地圖</h1>
+  <div id="controls">
+    <input type="text" id="searchInput" placeholder="搜尋店名...">
+    <div id="storeList"></div>
+  </div>
   <div id="map"></div>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -45,79 +66,88 @@
         address: "高雄市旗津區中洲三路579號",
         lat: 22.607608376992868,
         lng: 120.27266116806359,
-        discount: "主餐+飲品(大杯)折價5元",
-        icon: "🍔"
+        offer: "主餐+飲品(大杯)折價5元 🥪🧃"
       },
       {
         name: "阿水伯紅茶牛奶",
         address: "高雄市旗津區中洲三路597號",
         lat: 22.607757769643015,
         lng: 120.27260340075009,
-        discount: "全品項折5元",
-        icon: "🧋"
+        offer: "全品項折5元 🧋🧸"
       },
       {
         name: "旗津古早味陽春麵",
         address: "高雄市旗津區中洲三路651號",
         lat: 22.60973683485275, 
         lng: 120.2712220116006,
-        discount: "消費100折5元",
-        icon: "🍜"
+        offer: "消費100折5元 🍜💰"
       },
       {
         name: "五姨臭臭鍋",
         address: "高雄市旗津區中洲三路655號",
         lat: 22.609774691077337,
         lng: 120.2712206939175,
-        discount: "火鍋類折10元;鍋燒類/乾炒麵/飯類折5元",
-        icon: "🍲"
+        offer: "火鍋折10元🍲 鍋燒/炒麵/飯類折5元 🍳🍚"
       },
       {
         name: "瑋格先生早午餐",
         address: "高雄市旗津區中洲三路765號",
-        lat: 22.61193037423174,
+        lat:22.61193037423174,
         lng: 120.26983649399831,
-        discount: "消費滿100折5元",
-        icon: "🥪"
+        offer: "消費滿100折5元 🥓🥤"
       },
       {
         name: "阿宏壽司",
         address: "高雄市旗津區通山路7號",
-        lat: 22.612920388826435,
+        lat:22.612920388826435,
         lng: 120.26921444188898,
-        discount: "全品項折5元",
-        icon: "🍣"
+        offer: "全品項折5元 🍣🐟"
       },
       {
         name: "萬多利生魚片",
         address: "屏東縣東港鎮東港魚市場內（華僑市場旁邊）",
-        lat: 22.46798879751026,
+        lat:22.46798879751026,
         lng: 120.44052986701199,
-        discount: "鮭魚/鮪魚/旗魚 擇一多5片",
-        icon: "🐟"
-      },
-      {
-        name: "阿志蔥油餅",
-        address: "高雄市旗津區中洲三路661巷1號",
-        lat: 22.609916164750917,
-        lng: 120.27104448050731,
-        discount: "蔥抓餅產品提供雙蛋/滿50元折5元",
-        icon: "🥞"
+        offer: "鮭魚/鮪魚/旗魚 擇一多5片 🐠🍥"
       }
-
     ];
 
-    stores.forEach(store => {
-      L.marker([store.lat, store.lng])
+    const markers = [];
+
+    stores.forEach((store, index) => {
+      const marker = L.marker([store.lat, store.lng])
         .addTo(map)
-        .bindPopup(`
-          <div class="popup-content">
-            <b>${store.name}</b><br>
-            ${store.address}<br>
-            <span style="color:#d9534f; font-weight: bold;">${store.discount}</span><br>
-            <div style="font-size: 2em;">${store.icon}</div>
-          </div>
-        `);
+        .bindPopup(`<b>${store.name}</b><br>${store.address}<br><br><i>${store.offer}</i>`);
+
+      markers.push(marker);
+
+      const storeLink = document.createElement('a');
+      storeLink.href = '#';
+      storeLink.innerText = store.name;
+      storeLink.onclick = () => {
+        map.setView([store.lat, store.lng], 18);
+        marker.openPopup();
+      };
+      document.getElementById('storeList').appendChild(storeLink);
+    });
+
+    document.getElementById('searchInput').addEventListener('input', function () {
+      const keyword = this.value.toLowerCase();
+      const storeList = document.getElementById('storeList');
+      storeList.innerHTML = '';
+
+      stores.forEach((store, index) => {
+        if (store.name.toLowerCase().includes(keyword)) {
+          const storeLink = document.createElement('a');
+          storeLink.href = '#';
+          storeLink.innerText = store.name;
+          storeLink.onclick = () => {
+            map.setView([store.lat, store.lng], 18);
+            markers[index].openPopup();
+          };
+          storeList.appendChild(storeLink);
+        }
+      });
     });
   </script>
 </body>
