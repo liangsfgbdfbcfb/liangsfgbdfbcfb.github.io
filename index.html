@@ -1,154 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <title>高科海資系特約店家地圖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <style>
-    #map { height: 100vh; }
-    body { margin: 0; font-family: sans-serif; }
-    h1 {
-      position: relative;
-      z-index: 999;
-      background-color: rgba(255,255,255,0.8);
-      padding: 10px;
-      border-radius: 8px;
-      margin: 0;
-    }
-    #controls {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 999;
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    #storeList a {
-      display: block;
-      margin: 5px 0;
-      color: #007bff;
-      text-decoration: none;
-    }
-    #storeList a:hover {
-      text-decoration: underline;
-    }
-    #searchInput {
-      width: 200px;
-      padding: 5px;
-      margin-bottom: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高雄科技大學校園導覽</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+        }
+        header, footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+        nav {
+            background-color: #0055aa;
+            text-align: center;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 30px;
+        }
+        figure {
+            text-align: center;
+        }
+        figcaption {
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-  <h1>高科海資系特約店家地圖</h1>
-  <div id="controls">
-    <input type="text" id="searchInput" placeholder="搜尋店名...">
-    <div id="storeList"></div>
-  </div>
-  <div id="map"></div>
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    const map = L.map('map').setView([22.6075, 120.2727], 16);
+<header>
+    <h1>高雄科技大學校園導覽</h1>
+    <p><strong>探索南台灣最美的科技校園！</strong></p>
+</header>
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
-    }).addTo(map);
+<nav>
+    <a href="#intro">校園簡介</a>
+    <a href="#spots">熱門景點</a>
+    <a href="#video">導覽影片</a>
+    <a href="#contact">聯絡資訊</a>
+</nav>
 
-    const stores = [
-      {
-        name: "山水早餐店",
-        address: "高雄市旗津區中洲三路579號",
-        lat: 22.607608376992868,
-        lng: 120.27266116806359,
-        offer: "主餐+飲品(大杯)折價5元 🥪🧃"
-      },
-      {
-        name: "阿水伯紅茶牛奶",
-        address: "高雄市旗津區中洲三路597號",
-        lat: 22.607757769643015,
-        lng: 120.27260340075009,
-        offer: "全品項折5元 🧋🧸"
-      },
-      {
-        name: "旗津古早味陽春麵",
-        address: "高雄市旗津區中洲三路651號",
-        lat: 22.60973683485275, 
-        lng: 120.2712220116006,
-        offer: "消費100折5元 🍜💰"
-      },
-      {
-        name: "五姨臭臭鍋",
-        address: "高雄市旗津區中洲三路655號",
-        lat: 22.609774691077337,
-        lng: 120.2712206939175,
-        offer: "火鍋折10元🍲 鍋燒/炒麵/飯類折5元 🍳🍚"
-      },
-      {
-        name: "瑋格先生早午餐",
-        address: "高雄市旗津區中洲三路765號",
-        lat:22.61193037423174,
-        lng: 120.26983649399831,
-        offer: "消費滿100折5元 🥓🥤"
-      },
-      {
-        name: "阿宏壽司",
-        address: "高雄市旗津區通山路7號",
-        lat:22.612920388826435,
-        lng: 120.26921444188898,
-        offer: "全品項折5元 🍣🐟"
-      },
-      {
-        name: "萬多利生魚片",
-        address: "屏東縣東港鎮東港魚市場內（華僑市場旁邊）",
-        lat:22.46798879751026,
-        lng: 120.44052986701199,
-        offer: "鮭魚/鮪魚/旗魚 擇一多5片 🐠🍥"
-      }
-    ];
+<main>
 
-    const markers = [];
+    <article id="intro">
+        <h2>🏫 校園簡介</h2>
+        <p>高雄科技大學位於高雄市，環境優美、交通便利。學校共有多個校區，其中最靠海的旗津校區更是以海洋氣息聞名。</p>
+        <p>我是一名來自 <b>海事資訊科技系</b> 的學生，平常喜歡在校園裡拍照、喝咖啡、看海，這裡的生活讓我覺得非常 <i>放鬆</i>。</p>
+        <blockquote>「在這裡，你可以感受到學習與海風的交融。」</blockquote>
+        <time datetime="2025-10-23">最後更新：2025年10月23日</time>
+    </article>
 
-    stores.forEach((store, index) => {
-      const marker = L.marker([store.lat, store.lng])
-        .addTo(map)
-        .bindPopup(`<b>${store.name}</b><br>${store.address}<br><br><i>${store.offer}</i>`);
+    <section id="spots">
+        <h2>📍 校園熱門景點</h2>
 
-      markers.push(marker);
+        <ul>
+            <li>旗津海堤 — 最適合看夕陽的地方</li>
+            <li>圖書館 — 學習氣氛濃厚又安靜</li>
+            <li>學生餐廳 — 價格實惠又多選擇</li>
+        </ul>
 
-      const storeLink = document.createElement('a');
-      storeLink.href = '#';
-      storeLink.innerText = store.name;
-      storeLink.onclick = () => {
-        map.setView([store.lat, store.lng], 18);
-        marker.openPopup();
-      };
-      document.getElementById('storeList').appendChild(storeLink);
-    });
+        <ol>
+            <li>第一步：從校門口出發</li>
+            <li>第二步：沿著中庭走向海邊</li>
+            <li>第三步：在燈塔前拍一張合照！</li>
+        </ol>
 
-    document.getElementById('searchInput').addEventListener('input', function () {
-      const keyword = this.value.toLowerCase();
-      const storeList = document.getElementById('storeList');
-      storeList.innerHTML = '';
+        <dl>
+            <dt>旗津校區</dt>
+            <dd>擁有海洋科技相關科系，環境靠海、景色優美。</dd>
+            <dt>建工校區</dt>
+            <dd>以工程與管理為主，交通便利。</dd>
+        </dl>
 
-      stores.forEach((store, index) => {
-        if (store.name.toLowerCase().includes(keyword)) {
-          const storeLink = document.createElement('a');
-          storeLink.href = '#';
-          storeLink.innerText = store.name;
-          storeLink.onclick = () => {
-            map.setView([store.lat, store.lng], 18);
-            markers[index].openPopup();
-          };
-          storeList.appendChild(storeLink);
-        }
-      });
-    });
-  </script>
+        <figure>
+            <img src="campus.jpg" alt="高雄科技大學旗津校區" width="400" height="250">
+            <figcaption>旗津校區校園一角</figcaption>
+        </figure>
+    </section>
+
+    <section id="video">
+        <h2>🎬 校園導覽影片</h2>
+        <iframe width="560" height="315"
+        src="https://www.youtube.com/watch?v=Lek7UQ1gh3A"
+        title="高雄科技大學校園導覽影片"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+</iframe>
+
+        <p><em>※以上影片為高科大官方YouTube頻道所製作。</em></p>
+    </section>
+
+    <section id="audio">
+        <h2>🎧 校園音樂氛圍</h2>
+        <audio controls>
+            <source src="campus_music.mp3" type="audio/mpeg">
+            您的瀏覽器不支援音樂播放。
+        </audio>
+    </section>
+
+</main>
+
+<aside>
+    <h3>💡 小知識</h3>
+    <p>高科大的英文簡稱是 <strong>NKUST</strong>，由三所技術學院合併而成。</p>
+</aside>
+
+<footer id="contact">
+    <h4>📬 聯絡資訊</h4>
+    <address>
+        地址：高雄市旗津區中洲三路482號<br>
+        官方網站：<a href="https://www.nkust.edu.tw" target="_blank">https://www.nkust.edu.tw</a><br>
+        聯絡信箱：service@nkust.edu.tw
+    </address>
+    <p>© 2025 Kaohsiung University of Science and Technology</p>
+</footer>
+
 </body>
 </html>
+

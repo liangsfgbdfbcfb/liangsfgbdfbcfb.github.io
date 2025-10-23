@@ -1,0 +1,127 @@
+/*
+Save this file as: style.css
+Link it from your HTML <head> like:
+<link rel="stylesheet" href="style.css">
+
+This stylesheet complements the "高雄科技大學校園導覽" example HTML.
+*/
+
+:root{
+  --brand-dark:#003366;
+  --brand-mid:#0055aa;
+  --bg:#f0f8ff;
+  --text:#111;
+  --muted:#666;
+  --max-width:1100px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:20px;
+}
+
+header{
+  background:var(--brand-dark);
+  color:#fff;
+  padding:24px 12px;
+  text-align:center;
+}
+header h1{margin:0;font-size:1.8rem}
+header p{margin:6px 0 0;font-size:0.95rem}
+
+nav{
+  background:var(--brand-mid);
+  padding:10px 0;
+}
+nav .container{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:8px;
+  font-weight:600;
+}
+nav a:hover{filter:brightness(0.95)}
+
+main{
+  padding:28px 12px;
+}
+
+article, section{
+  background: #fff;
+  border-radius:10px;
+  padding:18px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.06);
+  margin-bottom:20px;
+}
+
+h2{margin-top:0}
+
+figure{margin:14px 0;text-align:center}
+figure img{max-width:100%;height:auto;border-radius:8px}
+figcaption{font-style:italic;color:var(--muted);font-size:0.95rem;margin-top:6px}
+
+ul,ol{padding-left:1.2rem}
+
+dt{font-weight:700}
+
+a{color:var(--brand-dark)}
+
+aside{
+  background:#fff;
+  border-radius:10px;
+  padding:14px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.04);
+  margin:0 12px 20px;
+}
+
+footer{
+  background:var(--brand-dark);
+  color:#fff;
+  padding:18px 12px;
+  text-align:center;
+}
+footer address{font-style:normal;color:#e6eef9}
+
+/* Media elements responsive */
+video, iframe, audio{
+  max-width:100%;
+  display:block;
+  margin:12px auto;
+}
+
+/* small layout: put aside under main */
+.layout{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:20px;
+  align-items:start;
+}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  nav .container{justify-content:space-around}
+  header h1{font-size:1.4rem}
+}
+
+/* Utility classes */
+.text-center{text-align:center}
+.small{font-size:0.9rem;color:var(--muted)}
+.btn{display:inline-block;padding:8px 12px;border-radius:6px;background:var(--brand-mid);color:#fff;text-decoration:none}
+
+/* print-friendly tweaks */
+@media print{
+  nav, .btn{display:none}
+  body{background:#fff}
+}
